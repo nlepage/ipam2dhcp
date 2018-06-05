@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"formation-go/ipam2dhcp/ipam"
 	"net/http"
@@ -33,12 +32,7 @@ func main() {
 func startPulling() *time.Ticker {
 	ticker := time.NewTicker(10 * time.Second)
 
-	go func() {
-		for range ticker.C {
-			fmt.Println("Pulling refresh...")
-			tryRefreshFile()
-		}
-	}()
+	// FIXME start a goroutine to iterate on the ticker and call tryRefreshFile
 
 	return ticker
 }
@@ -46,10 +40,7 @@ func startPulling() *time.Ticker {
 func startHTTPServer() error {
 	r := mux.NewRouter()
 
-	r.HandleFunc("/refresh", func(res http.ResponseWriter, req *http.Request) {
-		fmt.Println("Manual refresh...")
-		tryRefreshFile()
-	})
+	// FIXME Add a new HandleFunc to the router matching "/refresh" and calling tryRefreshFile
 
 	http.Handle("/", r)
 	return http.ListenAndServe(":8080", nil)
@@ -73,9 +64,7 @@ func refreshFile() error {
 	}
 	defer f.Close()
 
-	if err = json.NewEncoder(f).Encode(ips); err != nil {
-		return err
-	}
+	// FIXME write ips to f using json package from standard library
 
 	return nil
 }

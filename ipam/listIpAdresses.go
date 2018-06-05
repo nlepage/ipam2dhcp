@@ -14,10 +14,7 @@ func ListIpAddresses() ([]*models.IPAddress, error) {
 	params := &ipam.IPAMIPAddressesListParams{}
 	params.Context = context.Background()
 
-	res, err := c.IPAM.IPAMIPAddressesList(params, nil)
-	if err != nil {
-		return nil, err
-	}
+	// FIXME call c.IPAM.IPAMIPAddressesList, check for errors and return the results
 
-	return res.Payload.Results, nil
+	return nil, nil
 }

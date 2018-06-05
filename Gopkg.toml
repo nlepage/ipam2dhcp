@@ -32,3 +32,11 @@
 [[constraint]]
   name = "github.com/spf13/cobra"
   version = "0.0.3"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/digitalocean/go-netbox"
+
+[[constraint]]
+  name = "github.com/gorilla/mux"
+  version = "1.6.2"
